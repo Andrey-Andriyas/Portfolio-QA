@@ -6,9 +6,10 @@
 <br>
 
 ## Навыки и технологии
-``qase.io``, ``jira``, ``Postman``, ``SQL``, ``Swagger``, ``ChromeDevTools``, ``SoapUI``, ``REST API``
+``sitechko``, ``qase.io``, ``jira``, ``Postman``, ``Swagger``, ``SoapUI``, ``REST API``,    
+``SQL``, ``ChromeDevTools``,  ``Git``
 ## Проекты
 
 
 ## Контактная информация
-
+Emai: andriyas@mail.ru
