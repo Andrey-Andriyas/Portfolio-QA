@@ -22,5 +22,11 @@
   <li>Написать отчет о результатах тестирования</li>  
   </ol>
 
+> <a href="https://skypro-qa47-2-andriyas.atlassian.net/wiki/spaces/~63f6c8a11223974bc04bd332/pages/786433"> Ссылка на проект </a>  
+> логин: andriyas@mail.ru  
+> пароль: Andriyas_80
+
+<p>Выводы (итоги):<p>
+
 ## Контактная информация
 Emai: andriyas@mail.ru
