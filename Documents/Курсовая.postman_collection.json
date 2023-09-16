@@ -1,0 +1,3444 @@
+{
+	"info": {
+		"_postman_id": "654885e1-33bd-49ae-be6a-0461a90d98b2",
+		"name": "Курсовая 2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27741083",
+		"_collection_link": "https://red-escape-447289.postman.co/workspace/%25D0%259A%25D1%2583%25D1%2580%25D1%2581%25D0%25BE%25D0%25B2%25D0%25B0%25D1%258F~76528533-9220-4dd9-88e2-cb1a0f1d1df7/collection/27741083-654885e1-33bd-49ae-be6a-0461a90d98b2?action=share&creator=27741083&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "Базовые запросы",
+			"item": [
+				{
+					"name": "Получение списка событий",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}events",
+							"host": [
+								"{{baseUrl}}events"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Создание личного события",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"personalId\"\r",
+									"var value = pm.response.json().data.payload.id \r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"var key = \"startAt\"\r",
+									"var value = pm.response.json().data.startAt \r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-04T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-04T10:00:00+07:00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}createPersonal",
+							"host": [
+								"{{baseUrl}}createPersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Редактирование личного события",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var key = \"personalId\"\r",
+									"var value = pm.response.json().data.payload.id \r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"var key = \"startAt\"\r",
+									"var value = pm.response.json().data.startAt \r",
+									"pm.collectionVariables.set(key, value);\r",
+									"\r",
+									"\r",
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA2\",\r\n    \"startAt\": \"2023-07-04T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-04T10:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}updatePersonal",
+							"host": [
+								"{{baseUrl}}updatePersonal"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Удаление личного события",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Cookie",
+								"value": "token_global={{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": {{personalId}},\r\n    \"startAt\": \"{{startAt}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}removePersonal",
+							"host": [
+								"{{baseUrl}}removePersonal"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Валидные проверки",
+			"item": [
+				{
+					"name": "Отображение личных событий в расписании",
+					"item": [
+						{
+							"name": "Получение списка событий",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Cookie",
+										"value": "token_global={{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}events",
+									"host": [
+										"{{baseUrl}}events"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Создание личных событий",
+					"item": [
+						{
+							"name": "Создание личного события с валидными данными в будущем",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-09T10:30:00+07:00\",\r\n    \"endAt\": \"2023-07-09T11:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с валидными данными в прошлом",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-04T10:30:00+07:00\",\r\n    \"endAt\": \"2023-07-04T11:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с названием на кириллице не превышающем 40 символов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Количество символов в названии менее 40\",\r\n    \"title\": \"Создание личного события\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с названием на латинице не превышающем 40 символов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Количество символов в названии менее 40\",\r\n    \"title\": \"Create a personal event\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с названием содержащим числа и пробелы не превышающем 40 символов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Количество символов в названии менее 40\",\r\n    \"title\": \"1 2 3 4 5 6 7\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Редактирование личных событий",
+					"item": [
+						{
+							"name": "Редактирование названия и описания личного события",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тестирование редактирования названия и описания\",\r\n    \"title\": \"Тестовое событие 1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Редактирование названия и описания личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"Уже поменялось!\",\r\n    \"title\": \"AAA2\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Перенос личного события из будущего в прошлое",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события в будущем",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тестирование\",\r\n    \"title\": \"Тестовое событие в будущем\",\r\n    \"startAt\": \"2023-07-08T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-08T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Перенос личного события из будущего в прошлое",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"Уже поменялось!\",\r\n    \"title\": \"Тестовое событие в прошлом\",\r\n    \"startAt\": \"2023-07-03T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-03T10:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Перенос личного события из прошлого в будущее",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события в прошлом",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тестирование\",\r\n    \"title\": \"Тестовое событие в прошлом\",\r\n    \"startAt\": \"2023-07-03T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-03T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Перенос личного события из прошлого в будущее",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"Уже поменялось!\",\r\n    \"title\": \"Тестовое событие в будущем\",\r\n    \"startAt\": \"2023-07-08T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-08T10:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Перенос личного события на другое время в течение одного дня",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"Новое событие ААА\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Перенос события на другое время",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"Новое событие ААА\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Изменение цветовой схемы личного события на имеющуюся на сайте",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тестовое событие\",\r\n    \"title\": \"AAA111\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Изменение цветовой схемы",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#EBFDF2\",\r\n    \"color\": \"#43B658\",\r\n    \"description\": \"Тестовое событие\",\r\n    \"title\": \"AAA111\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Удаление личных событий",
+					"item": [
+						{
+							"name": "Удаление созданного личного события",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тестовое событие\",\r\n    \"title\": \"AAA111\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Удаление личного события",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": {{personalId}},\r\n    \"startAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}removePersonal",
+											"host": [
+												"{{baseUrl}}removePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Невалидные проверки",
+			"item": [
+				{
+					"name": "Создание личных событий",
+					"item": [
+						{
+							"name": "Создание личного события с названием превышающим 40 символов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с названием более 40 символов",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"Современные технологии достигли такого уровня, что постоянное информационно-пропагандистское обеспечение нашей деятельности выявляет срочную потребность кластеризации усилий\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с описанием превышающим 500 символов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с описанием более 500 символов",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Следует отметить, что семантический разбор внешних противодействий, в своём классическом представлении, допускает внедрение дальнейших направлений развития. Мы вынуждены отталкиваться от того, что сложившаяся структура организации предопределяет высокую востребованность благоприятных перспектив. В своём стремлении улучшить пользовательский опыт мы упускаем, что независимые государства могут быть преданы социально-демократической анафеме! Задача организации, в особенности же реализация намеченных плановых заданий выявляет срочную потребность поэтапного и последовательного развития общества\",\r\n    \"title\": \"ААА1\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с пустым названием",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-08-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с пустым названием",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"\",\r\n    \"startAt\": \"2023-07-05T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с несуществующими датами начала и окончания",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с несуществующими датами начала и окончания",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"ААА1\",\r\n    \"startAt\": \"2023-07-32T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-32T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с несуществующей датой начала и существующей датой окончания",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-08-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с несуществующей датой начала и существующей датой окончания",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"ААА1\",\r\n    \"startAt\": \"2023-07-32T09:30:00+07:00\",\r\n    \"endAt\": \"2023-08-01T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-08-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с существующей датой начала и несуществующей датой окончания",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-08-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с существующей датой начала и несуществующей датой окончания",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"ААА1\",\r\n    \"startAt\": \"2023-07-31T09:30:00+07:00\",\r\n    \"endAt\": \"2023-07-32T10:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-08-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Создание личного события с неустановленной датой",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с неустановленной датой",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"ААА1\",\r\n    \"startAt\": \"\",\r\n    \"endAt\": \"\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Редактирование личных событий",
+					"item": [
+						{
+							"name": "Изменение цветовой схемы личного события на цвета недоступные на сайте",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с цветовой схемой доступной на сайте",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Изменение цветовой схемы личного события на цвета недоступные на сайте",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFB6C1\",\r\n    \"color\": \"#B03060\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Изменение цветовой схемы личного события на пустые значения цветов",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события с цветовой схемой доступной на сайте",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Изменение цветовой схемы личного события на пустые значения цветов",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});\r",
+													"\r",
+													"pm.test(\"Status code is 400 or 4XX\", function () {\r",
+													"\r",
+													"    pm.expect(pm.response.code).to.be.oneOf([400, 403, 405, 422,], \"Это баг\");\r",
+													"\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"\",\r\n    \"color\": \"#\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\",\r\n    \"id\": {{personalId}},\r\n    \"oldStartAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}updatePersonal",
+											"host": [
+												"{{baseUrl}}updatePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Удаление личных событий",
+					"item": [
+						{
+							"name": "Удаление несуществующего личного события",
+							"item": [
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Создание личного события",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"var key = \"personalId\"\r",
+													"var value = pm.response.json().data.payload.id \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"var key = \"startAt\"\r",
+													"var value = pm.response.json().data.startAt \r",
+													"pm.collectionVariables.set(key, value);\r",
+													"\r",
+													"\r",
+													"pm.test(\"Status code is 200\", function () {\r",
+													"    pm.response.to.have.status(200);\r",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"backgroundColor\": \"#FFF7C7\",\r\n    \"color\": \"#FAC641\",\r\n    \"description\": \"Тест\",\r\n    \"title\": \"AAA1\",\r\n    \"startAt\": \"2023-07-05T12:30:00+07:00\",\r\n    \"endAt\": \"2023-07-05T13:00:00+07:00\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}createPersonal",
+											"host": [
+												"{{baseUrl}}createPersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Удаление личного события",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": {{personalId}},\r\n    \"startAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}removePersonal",
+											"host": [
+												"{{baseUrl}}removePersonal"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Получение списка событий",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"from\": \"2023-07-03T04:00:00+07:00\",\r\n    \"till\": \"2023-07-10T04:00:00+07:00\",\r\n    \"onlyTypes\": []\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}events",
+											"host": [
+												"{{baseUrl}}events"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Удаление несуществующего личного события",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Cookie",
+												"value": "token_global={{token}}",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"id\": {{personalId}},\r\n    \"startAt\": \"{{startAt}}\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}removePersonal",
+											"host": [
+												"{{baseUrl}}removePersonal"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJ1c2VySWQiOjE0NTk2OTMzLCJpZGVudGl0eSI6InRlc3QudHN0MzE3QHNreWVuZy5ydSIsImlkZW50aXR5TG9naW4iOm51bGwsImlkZW50aXR5RW1haWwiOiJ0ZXN0LnRzdDMxN0Bza3llbmcucnUiLCJpZGVudGl0eVBob25lIjpudWxsLCJuYW1lIjoidGVzdCIsInN1cm5hbWUiOiJ0ZXN0IiwiZW1haWwiOiJ0ZXN0LnRzdDMxN0Bza3llbmcucnUiLCJ1aUxhbmd1YWdlIjoicnUiLCJsb2NhbGUiOiJydSIsInNlcnZpY2VMb2NhbGUiOm51bGwsInVhcyI6MzAsImp3dFR5cGUiOjEsImp0aSI6InZ0Rk9KSU8wd2VhWnFoZUpjWGZwd1JuRlRnQnZ4c1JpIiwiYnJhbmQiOm51bGwsImV4cCI6MTY4ODY5MTY2OSwiYXZhdGFyVXJsIjoiaHR0cHM6XC9cL2F1dGgtYXZhdGFycy1za3llbmcuaW1naXgubmV0XC8xNDU5NjkzM1wvOThmNmJlYjUtZjA3Yi00MWViLThiYzItNDU3MTQwYTc0ODgzP2F1dG89Zm9ybWF0JTJDZW5oYW5jZSZmaXQ9Y3JvcCZoPTIwMCZpeGxpYj1waHAtMi4xLjEmcT03NSZzYXQ9OCZzaGFycD0xMCZ2aWI9OCZ3PTIwMCIsImFJc1N0cm9uZyI6dHJ1ZSwiYVR5cGUiOiJVU0VSTkFNRV9QQVNTV09SRCIsImFUaW1lIjoxNjgxNzgzMTA3LCJyb2xlcyI6WyJST0xFX1RFQUNIRVJfQ0FORElEQVRFIiwiUk9MRV9URUFDSEVSX0NBTkRJREFURV9CQVNFX0FDQ0VTUyIsIlJPTEVfVFRDX1VTQUdFIiwiUk9MRV9WSU1CT1hfVEVBQ0hFUl9VU0FHRSIsIlJPTEVfVEVBQ0hFUiIsIlJPTEVfQ1JNMl9URUFDSEVSX0FDQ0VTUyIsIlJPTEVfTUFUSF9URUFDSEVSIiwiUk9MRV9NQVRIX0NPTlRFTlRfVEhFTUVfVklFVyJdfQ.LIE5ihTpcvoAuQkQbZ6-Jpo_bGmkveoh7bS1yG5UsCpMs6j3M7uV1J4EPBryzyy90Y3_30wCve2qHwDfaz3KForSvnf5Yhqbas6qYixjQFDLvswSjIh2OqVblNkTHBHo6sh4OFsfNKf_mPUjfw4hGtr0Vd9tG1gOzZjz08DvJS31Yrzn1b1bc_Zczrw3BEtjJhDEApruHlFZWE_SDj2SOV08ADDiQRQ6UA9N5qZw4x3Ai36MC7t8aYzBs8uqXT5eA1dO33PAQUCmeqo3FFWjaTiHNuDhxfFylh76EFlqulrq3DDAzNS439ccAAnCw8NQIUhmxuGoAvoZGpTbjpPR_g4UIyRo4IqN_Kd7susItZcqElHjkpJQFtjBUJwvhE54vTMfvlukIM8EeqL2S6V9Cf0GnikG_i9Vbf6rnNriy6c9Z-XI7KDN0JlcY0BW4OCw5Iy1-f8I7wcjMGPAcE1CoZCjFWkR4EsY3qqALlzvDapYcFdXzWMNowU2bnjAyGwRO4LhRXAnOquvXUdL0L4yK5gz4OiFLAV-N-ANgHbh6_hITuU-60obzfnGnnqy4Jcw9DgSmC2PZd6DVCaN4KiFZpBOVMg84XlZh8Nt3s2_g1FGGiv_rCzZ20OZ-5r8rXD4SYIrgJo6i_judfD5HCoBm0scPDup_eqnlOOu4yYpGTM",
+			"type": "string"
+		},
+		{
+			"key": "baseUrl",
+			"value": "https://api-teachers.skyeng.ru/v2/schedule/"
+		},
+		{
+			"key": "personalId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "startAt",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
