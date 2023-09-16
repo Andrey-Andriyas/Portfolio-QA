@@ -6,8 +6,8 @@
 <br>
 
 ## Навыки и технологии
-``sitechko``, ``qase.io``, ``jira``, ``Postman``, ``Swagger``, ``SoapUI``, ``REST API``,    
-``SQL``, ``ChromeDevTools``,  ``Git``
+``sitechko``, ``checkvist``, ``qase.io``, ``jira``, ``Postman``, ``Swagger``,  
+``SoapUI``, ``SQL``, ``ChromeDevTools``,  ``Git``
 ## Проекты
 
 
