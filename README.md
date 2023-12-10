@@ -9,8 +9,8 @@
 
 ## Навыки и технологии
 ``sitechko``, ``checkvist``, ``qase.io``, ``jira``, ``Postman``, ``Swagger``,  
-``REST API``, ``SoapUI``, ``SQL``, ``PostgreSQL``, ``ChromeDevTools``,  ``Git``
-
+``REST API``, ``SoapUI``, ``SQL``, ``PostgreSQL``, ``ChromeDevTools``,  ``Git``,
+``Функциональное тестирование``, ``Тестирование пользовательского интерфейса``, ``Manual testing``
 
 ## Проекты
 <p>Курсовой проект: Тестирование кабинета учителя Skyeng<p> 
