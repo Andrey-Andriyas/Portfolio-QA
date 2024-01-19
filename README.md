@@ -37,4 +37,4 @@
   
 ## Контактная информация  
   
-Emai: andriyas@mail.ru
+Email: andriyas@mail.ru
